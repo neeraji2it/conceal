@@ -15,7 +15,7 @@
 //= require_tree .
 function ChangeValue(th) {
     $(th).find('input:radio')[0].checked = true;
-    $("select#user_city").val(" "+$(th).find('input:radio').val());
+    $("select#user_city").val($(th).find('input:radio').val());
 }
 
 $(document).ready(function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
         $(this).parent("li").removeClass("active");
         if ($(this).is(':checked') === true) {
             $(this).parent("li").addClass("active");
-            $("select#user_city").val(" "+$(this).val());
+            $("select#user_city").val($(this).val());
         }
     });
 });
