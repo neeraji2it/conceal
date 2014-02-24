@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content=" ">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Welcome To Conceal Alert</title>
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="bootstrap/js/html5shiv.js"></script>
+    <script src="bootstrap/js/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body class="withAnimation">
+    <div id="ct_preloader"></div>
+    <div id="boxedWrapper">
+      <!-- navbar -->
+      <nav class="navbar navbar-default navbar-fixed-top navbar-transparent" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" data-logo="/assets/logo.png"><img src="/assets/logo-onepager.png" alt=" "></a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <% if params[:controller] == "users" and (params[:action] == "new" or params[:action] == "create") or (params[:controller] == "orders" and params[:action] == "new") %>
+                <li class="active"><a href="/users/">Home</a></li>
+              <% else %>
+                <li class="active"><a href="#start">Start</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><%= link_to "signup", new_user_path %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- / navbar -->
+
+      <%= yield %>
+      <footer>
+        <div class="container postfooter">
+          <div class="row">
+            <aside class="col-md-6 widget">
+              <p style="color:#FEFEFE;">Conceal Alert and Mayday Alarm ©2014 PATENT-PENDING</p>
+            </aside>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <a href="#" id="toTop"><i class="fa fa-angle-up"></i></a>
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<section class="content-area brightText" style="padding-bottom: 0px; padding-top: 70px; background: #3C4143">
+  <div class="container">
+    <header class="page-header text-center">
+      <h3>When every second counts, Conceal Alert answers the call.</h3>
+
+      <h4><span style="color:#ffe015; font-weight:bold;">Respond to local paramedic and law enforcment emergencies. <br> Visualize local concealed-carry laws. Know your rights. Avoid fines.</span></h3>
+
+        <h4>We're lauching first in the State of Illinois. There are 26 off limits areas.<br>
+          Insted of getting confused, sign up now to tell us where to update maps next.</h4>
+
+        <h6><span style="#8c8e8f">GEOFENCING PRIORITY IS DETERMINED BY [1] USER SIZE & [2] FINANCIAL COMMITMENT</span></h6>
+
+    </header>
+</section>
+
+<section class="content-layer brightText make-overflow" id="contact">
+  <div class="row">
+    <div class="col-md-3" style="margin-left: 4.1em;"></div>
+    <div class="col-md-5">
+      <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active" onclick="ChangeValue(this)">
+            <%= f.radio_button :city,"Chicago",:checked => true %>
+            <a href="#tab1" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">CHICAGO, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Chicago").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Chicago").sum("fair_price")/User.grep_users(" Chicago").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">MAPPING IN PROGRESS</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Chicago").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+          <div class="contactForm">
+            <fieldset>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <%= f.select :city,  options_for_select([["Select", ""]] +  City.select(:city).uniq.map{|c| [c.city, c.city]},:selected => f.object.city), {}, :class=>"form-control"  %>
+                  </div>
+                </div>
+              </div>
+              <article class="table-content">
+                <div class="col-md-6" style="padding:0;" >
+                  <section class="table-row">
+                    <div class="table-cell">
+                      <%= f.text_field :fair_price, :class=>"form-control", :placeholder => "$5.00" %>
+                      <label class="control-label"><span style="font-size:10px; color:#FFF;">FAIR PRICE PER MONTH</span></label>
+                    </div>
+                    <div class="table-cell" style="padding-bottom:22px;">
+                      <span style="font-size:18px; margin-left:0.3em; color:#FFF;" class="widget-title">/MO.</span>
+                    </div>
+                  </section>
+                </div>
+                <div class="col-md-1">&nbsp;</div>
+                <div class="col-md-5" style="padding:0;">
+                  <section class="table-row">
+                    <div class="table-cell">
+                      <%= f.text_field :one_time_donation,:class=>"form-control", :placeholder => "$50.00" %>
+                      <label class="control-label"><span style="font-size:10px; color:#FFF;">Optional One-Time Donation To Boost City In Map Queue</span></label>
+                    </div>
+                  </section>
+                </div>
+              </article>
+            </fieldset>
+          </div>
+          <span style="font-size:10px; margin-left:7.5em; color:#999; font-weight:bold;">CLICK ON YOUR PREFERED CITY BELOW TO DONATE OR SELECT A NEW CITY</span>
+          <li onclick="ChangeValue(this)">
+            <%= f.radio_button :city, "Decatur" %>
+            <a href="#tab2" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">DECATUR, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Decatur").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Decatur").sum("fair_price")/User.grep_users(" Decatur").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#1 - GEOFENCE QUEUE</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Decatur").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+          <li onclick="ChangeValue(this)">
+            <%= f.radio_button :city, "Forsyth" %>
+            <a href="#tab3" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">FORSYTH, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Forsyth").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Forsyth").sum("fair_price")/User.grep_users(" Forsyth").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#2 - GEOFENCE QUEUE</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Forsyth").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+          <li onclick="ChangeValue(this)">
+            <%= f.radio_button :city, "Springfield" %>
+            <a href="#tab4" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:16px; font-weight:bold; color:#333;">SPRINGFIELD, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Springfield").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Springfield").sum("fair_price")/User.grep_users(" Springfield").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#3 - GEOFENCE QUEUE</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Springfield").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+          <li onclick="ChangeValue(this)">
+            <%= f.radio_button :city, "Champaign" %>
+            <a href="#tab5" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">CHAMPAIGN, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Champaign").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Champaign").sum("fair_price")/User.grep_users(" Champaign").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">MAPPING IN PROGRESS</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Champaign").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+          <li onclick="ChangeValue(this)">
+            <%= f.radio_button :city, "Bloomington",:class => "city_type1" %>
+            <a href="#tab6" data-toggle="tab">
+              <div class="row" style="height:20px;">
+                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">BLOOMINGTON, IL</span></div>
+                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Bloomington").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Bloomington").sum("fair_price")/User.grep_users(" Bloomington").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">MAPPING IN PROGRESS</span></div>
+                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Bloomington").count %></span> USERS COMMITTED TO CITY</span></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <input type="submit" class="btn btn-primary" value="NEXT">
+      <% end %><br /><br />
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+  <!-- / placeOver -->
+</section>
+<!-- / section -->
+<style>
+  input[type="radio"] {
+    display: none;
+  }
+</style>

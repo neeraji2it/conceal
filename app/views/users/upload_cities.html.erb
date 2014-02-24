@@ -1,0 +1,4 @@
+<%= form_for :cities, :url => upload_cities_path, :html => {:method => :post, :multipart => true} do |f|%>
+  <%= f.file_field :cities %>
+  <%= f.submit :upload %>
+<% end %>

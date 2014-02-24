@@ -1,0 +1,73 @@
+
+<section class="content-layer brightText make-overflow" id="contact">
+  <div class="row">
+    <br /><br /><br /><br />
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+      <h1>Order</h1>
+      <%= form_for @order,:url => user_orders_path(@user), :method => 'POST' do |f| %>
+        <ul style="padding: 0px;">
+          <% @order.errors.full_messages.each_with_index do |msg, index| %>
+            <li style="color: red;line-height: 20px;list-style: none;"><%= index+1 %>. <%= msg %></li>
+          <% end %>
+        </ul>
+        <% if @order.express_token.present? %>
+          <%= f.hidden_field :express_token %>
+          <p>Name: <%=h @order.first_name %> <%=h @order.last_name %></p>
+          <p>TODO Display order confirmation details</p>
+          <p><%= f.submit "Complete Order", :class=>"btn btn-primary" %></p>
+        <% else %>
+          <div class="contactForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.text_field :first_name, :class=>"form-control",:value => @order.first_name, :placeholder => "Cardholder’s First Name" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.text_field :last_name, :class=>"form-control",:value => @order.last_name, :placeholder => "Cardholder’s Last Name" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]], {}, :class=>"form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.text_field :card_number,:size => 33, :class=>"form-control", :placeholder => "Card Number" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true, :order => [:month, :year]}, :class=>"form-control", :style => 'width: 194px; margin: 4px;' %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <%= f.text_field :card_verification,:size => 33, :class=>"form-control", :placeholder => "Card Verification Value(CVV)" %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" class="btn btn-primary" value="ORDER">
+
+          <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), pay_path(@user)) %>
+        <% end %>
+      <% end %><br /><br />
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</section>
