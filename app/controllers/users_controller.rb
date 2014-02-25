@@ -1,6 +1,17 @@
 require 'csv'
 class UsersController < ApplicationController
-  autocomplete :city, :city, :scopes => [:uniquely_city], :full => true
+  autocomplete :city, :city, :full => true
+  
+  def autocomplete_city_city
+    term = params[:term]
+    if term && !term.empty?
+      items = City.select("distinct city").
+        where("LOWER(city) like ?", '%' + term.downcase + '%').order(:city)
+    else
+      items = {}
+    end
+    render :json => json_for_autocomplete(items, :city)
+  end
   def new
     @user = User.new
   end

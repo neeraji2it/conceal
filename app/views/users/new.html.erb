@@ -47,7 +47,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <%= f.autocomplete_field :city, autocomplete_city_city_users_path, :class=>"form-control" %>
-  <%#= f.select :city,  options_for_select([["Select", ""]] +  City.select(:city).uniq.map{|c| [c.city, c.city]},:selected => f.object.city), {}, :class=>"form-control"  %>
+  <%#= f.select :city,  options_for_select([["Select", ""]] +  City.select(:city).order(:city).uniq.map{|c| [c.city, c.city]},:selected => f.object.city), {}, :class=>"form-control"  %>
                   </div>
                 </div>
               </div>
