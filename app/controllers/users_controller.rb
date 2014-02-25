@@ -1,6 +1,6 @@
 require 'csv'
 class UsersController < ApplicationController
-  
+  autocomplete :city, :city, :scopes => [:uniquely_city], :full => true
   def new
     @user = User.new
   end

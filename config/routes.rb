@@ -1,6 +1,7 @@
 Conceal::Application.routes.draw do
   
   resources :users do
+    get :autocomplete_city_city, :on => :collection
     resources :orders
   end
   

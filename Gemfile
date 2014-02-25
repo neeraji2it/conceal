@@ -31,7 +31,7 @@ gem 'httparty'
 gem 'quiet_assets'
 gem 'activemerchant'
 gem "pg"
-
+gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

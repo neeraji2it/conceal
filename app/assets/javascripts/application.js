@@ -12,10 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-1.10.3.custom.min
+//= require autocomplete-rails
 //= require_tree .
 function ChangeValue(th) {
     $(th).find('input:radio')[0].checked = true;
-    $("select#user_city").val($(th).find('input:radio').val());
+    $("#user_city").val($(th).find('input:radio').val());
 }
 
 $(document).ready(function() {
@@ -23,7 +25,7 @@ $(document).ready(function() {
         $(this).parent("li").removeClass("active");
         if ($(this).is(':checked') === true) {
             $(this).parent("li").addClass("active");
-            $("select#user_city").val($(this).val());
+            $("#user_city").val($(this).val());
         }
     });
 });
