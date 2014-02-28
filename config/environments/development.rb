@@ -29,12 +29,10 @@ Conceal::Application.configure do
   
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
-    paypal_options = {
-      :login => "seller_1229899173_biz_api1.railscasts.com",
-      :password => "FXWU58S7KXFC6HBE",
-      :signature => "AGjv6SW.mTiKxtkm6L9DcSUCUgePAUDQ3L-kTdszkPG8mRfjaRZDYtSu"
-    }
-    ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
-    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    ::GATEWAY = ActiveMerchant::Billing::AuthorizeNetCimGateway.new(
+        :login => AUTHORIZE_SANDBOX_LOGIN_ID,
+        :password => AUTHORIZE_SANDBOX_TRANSACTION_KEY,
+        :test => true
+    )
   end
 end

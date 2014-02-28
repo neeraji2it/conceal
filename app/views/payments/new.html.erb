@@ -1,0 +1,108 @@
+
+<section class="content-layer brightText make-overflow" id="contact">
+  <div class="row">
+    <br /><br /><br /><br />
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+
+      <h1>Credit Card Details:</h1>
+      <%= form_for @payment,:url => user_payments_path(@user), :method => 'POST' do |f| %>
+        <ul style="padding: 0px;">
+          <% @payment.errors.full_messages.each_with_index do |msg, index| %>
+            <li style="color: red;line-height: 20px;list-style: none;"><%= index+1 %>. <%= msg %></li>
+          <% end %>
+        </ul>
+        <div class="contactForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.text_field :first_name, :class=>"form-control",:value => @payment.first_name, :placeholder => "Cardholder’s First Name" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.text_field :last_name, :class=>"form-control",:value => @payment.last_name, :placeholder => "Cardholder’s Last Name" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.select :card_type, [["Visa", "visa"], ["MasterCard", "master"], ["Discover", "discover"], ["American Express", "american_express"]], {}, :class=>"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.text_field :card_number,:size => 33, :class=>"form-control", :placeholder => "Card Number" %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.date_select :card_expires_on, {:discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :add_month_numbers => true, :order => [:month, :year]}, :class=>"form-control", :style => 'width: 194px; margin: 4px;' %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <%= f.text_field :card_verification,:size => 33, :class=>"form-control", :placeholder => "Card Verification Value(CVV)" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1>Payment Details</h1>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :address, :class=>"form-control", :placeholder => "Enter Address" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :state, :class=>"form-control", :placeholder => "Enter State" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :country, :class=>"form-control", :placeholder => "Enter Country" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :zip, :class=>"form-control", :placeholder => "Enter Zip" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :phone_number, :class=>"form-control", :placeholder => "Enter Phone Number" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= f.text_field :fax_number, :class=>"form-control", :placeholder => "Enter Fax Number" %>
+            </div>
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Pay">
+
+      <% end %><br /><br />
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</section>

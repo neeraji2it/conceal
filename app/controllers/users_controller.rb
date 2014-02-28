@@ -1,7 +1,8 @@
 require 'csv'
+require 'mailchimp'
 class UsersController < ApplicationController
   autocomplete :city, :city, :full => true
-  
+  before_action :setup_mcapi, :only => ["create"]
   def autocomplete_city_city
     term = params[:term]
     if term && !term.empty?
@@ -19,6 +20,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      unless Mailchimp::ListAlreadySubscribedError
+        @mc.lists.subscribe(@list_id, {'email' => @user.email})
+      end
       redirect_to new_user_order_path(@user)
     else
       render "new"
@@ -54,6 +58,11 @@ class UsersController < ApplicationController
     else
       render :layout => false
     end
+  end
+  
+  def setup_mcapi
+    @mc = Mailchimp::API.new(MAILCHIMP_API)
+    @list_id = MAILCHIMP_LIST_ID
   end
   
   private

@@ -79,13 +79,10 @@ Conceal::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
   
   config.after_initialize do
-    ActiveMerchant::Billing::Base.mode = :test
-    paypal_options = {
-      :login => "seller_1229899173_biz_api1.railscasts.com",
-      :password => "FXWU58S7KXFC6HBE",
-      :signature => "AGjv6SW.mTiKxtkm6L9DcSUCUgePAUDQ3L-kTdszkPG8mRfjaRZDYtSu"
-    }
-    ::STANDARD_GATEWAY = ActiveMerchant::Billing::PaypalGateway.new(paypal_options)
-    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    ActiveMerchant::Billing::Base.mode = :production
+    ::GATEWAY = ActiveMerchant::Billing::AuthorizeNetCimGateway.new(
+      :login => AUTHORIZE_LOGIN_ID,
+      :password => AUTHORIZE_TRANSACTION_KEY
+    )
   end
 end

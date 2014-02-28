@@ -2,7 +2,7 @@ Conceal::Application.routes.draw do
   
   resources :users do
     get :autocomplete_city_city, :on => :collection
-    resources :orders
+    resources :payments
   end
   
   
@@ -12,7 +12,6 @@ Conceal::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'users#new'
-  get '/users/:id/order/express' => 'orders#express', :as => :pay
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

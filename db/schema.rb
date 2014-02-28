@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222122834) do
+ActiveRecord::Schema.define(version: 20140228061746) do
 
   create_table "cities", force: true do |t|
     t.string   "zipcode"
@@ -24,22 +24,26 @@ ActiveRecord::Schema.define(version: 20140222122834) do
     t.datetime "updated_at"
   end
 
-  create_table "orders", force: true do |t|
+  create_table "payments", force: true do |t|
     t.integer  "user_id"
-    t.string   "ip_address"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "card_type"
     t.date     "card_expires_on"
-    t.string   "express_token"
-    t.string   "express_payer_id"
-    t.string   "payment_type"
     t.string   "action"
-    t.integer  "amount"
+    t.float    "amount"
     t.boolean  "success"
     t.string   "authorization"
     t.string   "message"
     t.text     "params"
+    t.string   "address"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zip"
+    t.string   "phone_number"
+    t.string   "fax_number"
+    t.string   "customer_profile_id"
+    t.string   "customer_payment_profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

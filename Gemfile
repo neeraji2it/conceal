@@ -32,6 +32,7 @@ gem 'quiet_assets'
 gem 'activemerchant'
 gem "pg"
 gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
+gem "mailchimp-api", "~> 2.0.4"
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
