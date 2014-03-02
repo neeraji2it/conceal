@@ -23,7 +23,7 @@ class UsersController < ApplicationController
       unless Mailchimp::ListAlreadySubscribedError
         @mc.lists.subscribe(@list_id, {'email' => @user.email})
       end
-      redirect_to new_user_order_path(@user)
+      redirect_to new_user_payment_path(@user)
     else
       render "new"
     end
