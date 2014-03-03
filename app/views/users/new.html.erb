@@ -43,7 +43,7 @@
           </li>
           <div class="contactForm">
             <fieldset>
-               <div class="row">
+              <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
                     <%= f.email_field :email, :class=>"form-control", :placeholder => "Enter Email" %>
@@ -53,7 +53,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <%= f.autocomplete_field :city, autocomplete_city_city_users_path, :class=>"form-control" %>
+                    <%= f.autocomplete_field :city, autocomplete_city_city_users_path, :data => { :no_matches_label => 'Please enter cities from Illinois' }, :class=>"form-control" %>
   <%#= f.select :city,  options_for_select([["Select", ""]] +  City.select(:city).order(:city).uniq.map{|c| [c.city, c.city]},:selected => f.object.city), {}, :class=>"form-control"  %>
                   </div>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-6" style="padding:0;" >
                   <section class="table-row">
                     <div class="table-cell">
-                      <%= f.text_field :fair_price, :class=>"form-control", :placeholder => "$5.00" %>
+                      <%= f.text_field :fair_price, :class=>"form-control", :placeholder => "Enter price" %>
                       <label class="control-label"><span style="font-size:10px; color:#FFF;">FAIR PRICE PER MONTH</span></label>
                     </div>
                     <div class="table-cell" style="padding-bottom:22px;">
@@ -74,7 +74,7 @@
                 <div class="col-md-5" style="padding:0;">
                   <section class="table-row">
                     <div class="table-cell">
-                      <%= f.text_field :one_time_donation,:class=>"form-control", :placeholder => "$50.00" %>
+                      <%= f.text_field :one_time_donation,:class=>"form-control", :placeholder => "Enter price" %>
                       <label class="control-label"><span style="font-size:10px; color:#FFF;">Optional One-Time Donation To Boost City In Map Queue</span></label>
                     </div>
                   </section>
@@ -83,72 +83,26 @@
               <input type="submit" class="btn btn-primary" value="NEXT">
             </fieldset>
           </div>
-          <span style="font-size:10px; margin-left:7.5em; color:#999; font-weight:bold;">CLICK ON YOUR PREFERED CITY BELOW TO DONATE OR SELECT A NEW CITY</span>
-          <li onclick="ChangeValue(this)">
-            <%= f.radio_button :city, " Decatur" %>
-            <a href="#tab2" data-toggle="tab">
-              <div class="row" style="height:20px;">
-                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">DECATUR, IL</span></div>
-                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Decatur").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Decatur").sum("fair_price")/User.grep_users(" Decatur").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
-              </div>
-              <div class="row">
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#1 - GEOFENCE QUEUE</span></div>
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Decatur").count %></span> USERS COMMITTED TO CITY</span></div>
-              </div>
-            </a>
-          </li>
-          <li onclick="ChangeValue(this)">
-            <%= f.radio_button :city, " Forsyth" %>
-            <a href="#tab3" data-toggle="tab">
-              <div class="row" style="height:20px;">
-                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">FORSYTH, IL</span></div>
-                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Forsyth").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Forsyth").sum("fair_price")/User.grep_users(" Forsyth").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
-              </div>
-              <div class="row">
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#2 - GEOFENCE QUEUE</span></div>
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Forsyth").count %></span> USERS COMMITTED TO CITY</span></div>
-              </div>
-            </a>
-          </li>
-          <li onclick="ChangeValue(this)">
-            <%= f.radio_button :city, " Springfield" %>
-            <a href="#tab4" data-toggle="tab">
-              <div class="row" style="height:20px;">
-                <div class="col-md-5"><span style="font-size:16px; font-weight:bold; color:#333;">SPRINGFIELD, IL</span></div>
-                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Springfield").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Springfield").sum("fair_price")/User.grep_users(" Springfield").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
-              </div>
-              <div class="row">
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#3 - GEOFENCE QUEUE</span></div>
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Springfield").count %></span> USERS COMMITTED TO CITY</span></div>
-              </div>
-            </a>
-          </li>
-          <li onclick="ChangeValue(this)">
-            <%= f.radio_button :city, " Champaign" %>
-            <a href="#tab5" data-toggle="tab">
-              <div class="row" style="height:20px;">
-                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">CHAMPAIGN, IL</span></div>
-                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Champaign").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Champaign").sum("fair_price")/User.grep_users(" Champaign").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
-              </div>
-              <div class="row">
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#4 - GEOFENCE QUEUE</span></div>
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Champaign").count %></span> USERS COMMITTED TO CITY</span></div>
-              </div>
-            </a>
-          </li>
-          <li onclick="ChangeValue(this)">
-            <%= f.radio_button :city, " Bloomington",:class => "city_type1" %>
-            <a href="#tab6" data-toggle="tab">
-              <div class="row" style="height:20px;">
-                <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;">BLOOMINGTON, IL</span></div>
-                <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= User.grep_users(" Bloomington").sum("fair_price") == 0.0 ? 0 : User.grep_users(" Bloomington").sum("fair_price")/User.grep_users(" Bloomington").count %></span> AVERAGE MONTHLY PLEDGE</span></div>
-              </div>
-              <div class="row">
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#5 - GEOFENCE QUEUE</span></div>
-                <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= User.grep_users(" Bloomington").count %></span> USERS COMMITTED TO CITY</span></div>
-              </div>
-            </a>
-          </li>
+          <% unless  @high_cities.blank?  %>
+            <span style="font-size:10px; margin-left:7.5em; color:#999; font-weight:bold;">CLICK ON YOUR PREFERED CITY BELOW TO DONATE OR SELECT A NEW CITY</span>
+          <% end %>
+          <% i = 0 %>
+          <% @high_cities.each do |hc|  %>
+            <li onclick="ChangeValue(this)" style="text-transform: uppercase;">
+              <%= f.radio_button :city, "#{hc.city}" %>
+              <a href="#tab2" data-toggle="tab">
+                <div class="row" style="height:20px;">
+                  <div class="col-md-5"><span style="font-size:18px; font-weight:bold; color:#333;"><%= hc.city %>, IL</span></div>
+                  <div class="col-md-7"><span style="font-size:10px; font-weight:bold;  color:#333; float:right;"><span style="color:#732013;">$<%= hc.avg_price %></span> AVERAGE MONTHLY PLEDGE</span></div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333;">#<%= i + 1 %> - GEOFENCE QUEUE</span></div>
+                  <div class="col-md-6"><span style="font-size:10px; font-weight:bold; color:#333; float:right;"><span style="color:#2e3192;"><%= hc.users_count %></span> USERS COMMITTED TO CITY</span></div>
+                </div>
+              </a>
+            </li>
+            <% i = i + 1 %>
+          <% end %>
         </ul>
       <% end %><br /><br />
     </div>

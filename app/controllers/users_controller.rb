@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
   def new
     @user = User.new
+    @high_cities = User.highest_rated
   end
   
   def create

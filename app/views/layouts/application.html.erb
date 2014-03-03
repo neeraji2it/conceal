@@ -40,7 +40,7 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-              <% if params[:controller] == "users" and (params[:action] == "new" or params[:action] == "create") or (params[:controller] == "orders" and params[:action] == "new") %>
+              <% if params[:controller] == "users" and (params[:action] == "new" or params[:action] == "create") or (params[:controller] == "payments" and params[:action] == "new" or params[:action] == "create") %>
                 <li class="active"><a href="/users/">Home</a></li>
               <% else %>
                 <li class="active"><a href="#start">Start</a></li>

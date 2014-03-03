@@ -6,6 +6,7 @@
     <div class="col-md-4">
 
       <h1>Credit Card Details:</h1>
+      <h6>Total Amount: <%= @user.fair_price.to_f + @user.one_time_donation.to_f %></h6>
       <%= form_for @payment,:url => user_payments_path(@user), :method => 'POST' do |f| %>
         <ul style="padding: 0px;">
           <% @payment.errors.full_messages.each_with_index do |msg, index| %>
@@ -89,13 +90,6 @@
           <div class="col-md-12">
             <div class="form-group">
               <%= f.text_field :phone_number, :class=>"form-control", :placeholder => "Enter Phone Number" %>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <%= f.text_field :fax_number, :class=>"form-control", :placeholder => "Enter Fax Number" %>
             </div>
           </div>
         </div>
