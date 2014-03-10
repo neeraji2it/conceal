@@ -6,9 +6,8 @@
       <h4><span style="color:#ffe015; font-weight:bold;">Respond to local paramedic and law enforcment emergencies. <br> Visualize local concealed-carry laws. Know your rights. Avoid fines.</span></h3>
         <iframe src="//fast.wistia.net/embed/iframe/7uibn7qtlv?videoFoam=true" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="640" height="388"></iframe><script src="//fast.wistia.net/assets/external/iframe-api-v1.js"></script>
 
-        <h4>We're lauching first in the State of Illinois. There are 26 off limits areas.<br>
-          Insted of getting confused, sign up now to tell us where to update maps next.
-          <br>For only $XX more today, you can get your city into the top 5!
+        <h4>We're launching first in the State of Illinois. There are 26 off limits areas.<br>
+          Instead of getting confused, sign up now to tell us where to update maps next.
         </h4>
 
         <h6><span style="#8c8e8f">GEOFENCING PRIORITY IS DETERMINED BY [1] USER SIZE & [2] FINANCIAL COMMITMENT</span></h6>
@@ -58,6 +57,7 @@
                   <div class="form-group">
                     <%= f.autocomplete_field :city, autocomplete_city_city_users_path, :data => { :no_matches_label => 'Please enter cities from Illinois' }, :class=>"form-control" %>
   <%#= f.select :city,  options_for_select([["Select", ""]] +  City.select(:city).order(:city).uniq.map{|c| [c.city, c.city]},:selected => f.object.city), {}, :class=>"form-control"  %>
+                    <br>For only $XX more today, you can get your city into the top 5!
                   </div>
                 </div>
               </div>
