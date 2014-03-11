@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
+    @high_cities = User.highest_rated
     if @user.save
       unless Mailchimp::ListAlreadySubscribedError
         @mc.lists.subscribe(@list_id, {'email' => @user.email})
@@ -66,6 +67,18 @@ class UsersController < ApplicationController
     @list_id = MAILCHIMP_LIST_ID
   end
   
+  def change_top_value
+    @high_cities = User.highest_rated
+    city = params[:id]
+    @user_city = User.select("users.city, AVG(users.fair_price) as avg_price, COUNT(users.id) as users_count").where(:city => city,:status => "Completed").group(:city)
+    if @high_cities.present? and @user_city.present?
+      @amount = @high_cities.last.avg_price - @user_city.last.avg_price + 1
+    elsif @high_cities.present? and !@user_city.present?
+      @amount = @high_cities.last.avg_price + 1
+    else
+      @amount = 51
+    end
+  end
   private
   def user_params
     params.require(:user).permit!

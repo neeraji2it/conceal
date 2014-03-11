@@ -3,6 +3,9 @@ Conceal::Application.routes.draw do
   resources :users do
     get :autocomplete_city_city, :on => :collection
     resources :payments
+    member do
+      post :change_top_value
+    end
   end
   
   
